@@ -8,16 +8,21 @@ function installfaust {
 	fi
 	cd ~/FaustInstall
 
-	SUDO=`which sudo`
+	# for some reason which sudo doesn't work with Docker Ubuntu 16.04
+	#SUDO=`which sudo`
+	if [ -e /usr/bin/sudo ]; then
+		SUDO=/usr/bin/sudo
+	fi
 
 	echo "Updating packages..."
 	$SUDO apt-get -y update
 	echo "Installing Faust dependencies..."
-	$SUDO apt-get install -y build-essential pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev
+	echo yes | $SUDO apt install -y jackd2
+	$SUDO apt-get install -y build-essential pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common
 
 	# Install all the needed SDK
-	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev jackd2 libjack-jackd2-dev libqrencode-dev qjackctl
-	$SUDO apt-get install -y qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev
+	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev
+	$SUDO apt-get install -y libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev
 	$SUDO apt-get install -y inkscape graphviz
 
     # install QT5 for faust2faustvst
@@ -82,7 +87,7 @@ function installfaust {
 
 	# Install Android development tools
 	## install java 8
-    $SUDO apt install openjdk-8-jdk
+    $SUDO apt install -y openjdk-8-jdk
 
 	## install android sdk
     if [ ! -d /opt/android ]; then
