@@ -8,13 +8,18 @@ function installserver {
 	fi
 	cd ~/FaustInstall
 
-	SUDO=`which sudo`
+		# for some reason which sudo doesn't work with Docker Ubuntu 16.04
+	#SUDO=`which sudo`
+	if [ -e /usr/bin/sudo ]; then
+		SUDO=/usr/bin/sudo
+	fi
+	
 	MYHOME=$HOME
 	MYSELF=`whoami`
 
 	echo "Updating packages and Installing Faust website dependencies..."
-	###$SUDO apt-get -y update
-	$SUDO apt-get install -y apache2 ruby ruby-dev nodejs
+	$SUDO apt-get -y update
+	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs
 
 	echo "Install Jekyll"
 	$SUDO gem install jekyll
