@@ -1,4 +1,4 @@
-#!/bin/bash
+	#!/bin/bash
 set -e
 
 function installfaust {
@@ -100,6 +100,7 @@ function installfaust {
             tar -xzf android-sdk_r24.4.1-linux.tgz
             $SUDO mv android-sdk-linux/ /opt/android/sdk
         fi
+		export ANDROID_HOME="/opt/android/sdk"
 
         ## install android ndk
         if [ ! -f android-ndk-r12-linux-x86_64.zip ]; then
@@ -112,7 +113,12 @@ function installfaust {
         fi
 
         export PATH="/opt/android/sdk/tools:/opt/android/sdk/platform-tools:/opt/android/ndk:$PATH"
-        echo y | android update sdk --no-ui -a --filter tools,platform-tools,android-24,build-tools-24.0.0
+        echo y | 
+		
+		# install missing cmake for android
+		wget https://github.com/Commit451/android-cmake-installer/releases/download/1.1.0/install-cmake.sh
+		chmod +x install-cmake.sh
+		$SUDO ./install-cmake.sh
     fi
 
 	# Install Latex
