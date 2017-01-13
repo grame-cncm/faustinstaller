@@ -126,7 +126,7 @@ function installfaust {
 
 	# Install Faust if needed
 	if [ ! -d "faust" ]; then
-		git clone http://git.code.sf.net/p/faudiostream/code faust
+		git clone https://github.com/grame-cncm/faust.git
 	fi
 
 	# Update and compile Faust		
