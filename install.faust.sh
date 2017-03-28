@@ -21,7 +21,7 @@ function installfaust {
 	$SUDO apt-get install -y build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common
 
 	# Install all the needed SDK
-	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev
+	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev
 	$SUDO apt-get install -y libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev
 	$SUDO apt-get install -y inkscape graphviz
 
@@ -63,11 +63,11 @@ function installfaust {
 		$SUDO cp -r max-sdk-7.1.0/source/c74support /usr/local/include/
 	fi
 
-	# Install ROS Jade
-	#$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-	#$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
-	#$SUDO apt-get -y update
-	#$SUDO apt-get install -y ros-jade-ros-base
+	# Install ROS Jade, see $(lsb_release -sc) instead of xenial
+	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
+	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
+	$SUDO apt-get -y update
+	$SUDO apt-get install -y ros-kinetic-ros
 
 
 	# Install Bela
