@@ -24,6 +24,7 @@ function installfaustservice {
 	cd ~/FaustInstall/faustservice
 	git pull
 	make
+	$SUDO make install
 
 	echo "Installation Done! (but service not started: run ./faustweb)"
 
