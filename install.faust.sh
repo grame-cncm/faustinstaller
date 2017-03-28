@@ -35,7 +35,7 @@ function installfaust {
 	$SUDO apt-get install -y software-properties-common
 	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
 	$SUDO apt-get -y update
-	$SUDO apt-get install -y faust2pd
+	$SUDO apt-get install -y faust2pd faust2pd-extra
 
 	# Install pd.dll needed to cross compile pd externals for windows
     if [ ! -d /usr/include/pd/pd.dll ]; then
