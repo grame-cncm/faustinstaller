@@ -39,7 +39,7 @@ function installfaust {
 
 	# Install pd.dll needed to cross compile pd externals for windows
     if [ ! -d /usr/include/pd/pd.dll ]; then
-        wget http://faust.grame.fr/pd.dll
+        wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
         $SUDO mv pd.dll /usr/include/pd/
     fi
 
@@ -79,7 +79,7 @@ function installfaust {
 
     if [ ! -d /usr/arm-linux-gnueabihf/include/xenomai ]; then
         # install xenomia (should be downloaded from an official place)
-        wget http://faust.grame.fr/xenomai.tgz
+        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
         tar xzf xenomai.tgz
         $SUDO mv xenomai /usr/arm-linux-gnueabihf/include/
     fi
@@ -113,8 +113,8 @@ function installfaust {
         fi
 
         export PATH="/opt/android/sdk/tools:/opt/android/sdk/platform-tools:/opt/android/ndk:$PATH"
-        echo y | 
-		
+        echo y |
+
 		# install missing cmake for android
 		wget https://github.com/Commit451/android-cmake-installer/releases/download/1.1.0/install-cmake.sh
 		chmod +x install-cmake.sh
@@ -129,7 +129,7 @@ function installfaust {
 		git clone https://github.com/grame-cncm/faust.git
 	fi
 
-	# Update and compile Faust		
+	# Update and compile Faust
 	cd faust
 	git checkout faust2
 	git pull
@@ -141,5 +141,3 @@ function installfaust {
 }
 
 installfaust
-
-
