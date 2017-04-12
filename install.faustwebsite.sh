@@ -41,6 +41,14 @@ function installserver {
 	$SUDO cp config-files/001-faust.conf /etc/apache2/sites-available/
 	$SUDO sed -i s%HOME%$MYHOME%g /etc/apache2/sites-available/001-faust.conf
 	$SUDO sed -i s%www-data%$MYSELF%g /etc/apache2/envvars
+
+	$SUDO sh -c "echo '## For Faust2Android (added by installer)' >> /etc/apache2/envvars"
+	$SUDO sh -c "echo 'ANDROID_ROOT=/opt/android' >> /etc/apache2/envvars"
+	$SUDO sh -c "echo 'ANDROID_HOME=/opt/android/sdk' >> /etc/apache2/envvars"
+	$SUDO sh -c "echo 'ANDROID_SDK_ROOT=/opt/android/sdk' >> /etc/apache2/envvars"
+	$SUDO sh -c "echo 'ANDROID_NDK_ROOT=/opt/android/ndk' >> /etc/apache2/envvars"
+	$SUDO sh -c "echo 'ANDROID_NDK_HOME=/opt/android/ndk' >> /etc/apache2/envvars"
+
 	$SUDO a2ensite 001-faust.conf
 	$SUDO a2dissite 000-default.conf
 	cd ..
