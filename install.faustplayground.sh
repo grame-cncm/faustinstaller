@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-function installfaustplayground {
+installfaustplayground() {
 	SUDO=`which sudo`
 
 	echo "Installing Faust Playground"

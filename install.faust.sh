@@ -1,7 +1,7 @@
-	#!/bin/bash
+#!/bin/bash
 set -e
 
-function installfaust {
+installfaust() {
 	# Install 'Installation directory' if needed
 	if [ ! -d ~/FaustInstall ]; then
 		mkdir ~/FaustInstall
@@ -18,7 +18,7 @@ function installfaust {
 	$SUDO apt-get -y update
 	echo "Installing Faust dependencies..."
 	echo yes | $SUDO apt install -y jackd2
-	$SUDO apt-get install -y build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common
+	$SUDO apt-get install -y build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-5.0 llvm-5.0-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common
 
 	# Install all the needed SDK
 	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev
