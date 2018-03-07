@@ -32,7 +32,7 @@ installonlinecompiler() {
 	fi
 	
 	echo "Install PHP and qrencode"
-	$SUDO apt-get install -y php libapache2-mod-php qrencode
+	$SUDO apt-get install -y php libapache2-mod-php qrencode highlight
 
 	
 	echo "Installation Done!"
