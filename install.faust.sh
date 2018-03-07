@@ -64,10 +64,10 @@ installfaust() {
 	fi
 
 	# Install ROS Jade, see $(lsb_release -sc) instead of artful
-	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu artful main" > /etc/apt/sources.list.d/ros-latest.list'
-	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
-	$SUDO apt-get -y update
-	$SUDO apt-get install -y ros-kinetic-ros
+	#$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu artful main" > /etc/apt/sources.list.d/ros-latest.list'
+	#$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
+	#$SUDO apt-get -y update
+	#$SUDO apt-get install -y ros-kinetic-ros
 
 
 	# Install Bela
