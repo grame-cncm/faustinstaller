@@ -17,12 +17,12 @@ installfaust() {
 	echo "Updating packages..."
 	$SUDO apt-get -y update
 	echo "Installing Faust dependencies..."
-	echo yes | $SUDO apt install -y jackd2
+	#echo yes | $SUDO apt install -y jackd2
 	$SUDO apt-get install -y build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-5.0 llvm-5.0-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common
 
 	# Install all the needed SDK
-	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev
-	$SUDO apt-get install -y libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev
+	$SUDO apt-get install -y libgtk2.0-dev libasound2-dev libqrencode-dev
+	$SUDO apt-get install -y libjack-jackd2-dev libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev
 	$SUDO apt-get install -y inkscape graphviz
 
     # install QT5 for faust2faustvst
@@ -33,7 +33,7 @@ installfaust() {
 
 	# Install faust2pd from Albert Greaf Pure-lang PPA
 	$SUDO apt-get install -y software-properties-common
-	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
+	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.artful
 	$SUDO apt-get -y update
 	$SUDO apt-get install -y faust2pd faust2pd-extra
 
