@@ -38,9 +38,10 @@ installfaust() {
 	$SUDO apt-get install -y faust2pd faust2pd-extra
 
 	# Install pd.dll needed to cross compile pd externals for windows
-    if [ ! -d /usr/include/pd/pd.dll ]; then
+	$SUDO install -d /usr/lib/i686-w64-mingw32/pd
+    if [ ! -d /usr/lib/i686-w64-mingw32/pd/pd.dll ]; then
         wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
-        $SUDO mv pd.dll /usr/include/pd/
+        $SUDO mv pd.dll /usr/lib/i686-w64-mingw32/pd/
     fi
 
 
