@@ -63,8 +63,8 @@ installfaust() {
 		$SUDO cp -r max-sdk-7.1.0/source/c74support /usr/local/include/
 	fi
 
-	# Install ROS Jade, see $(lsb_release -sc) instead of xenial
-	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
+	# Install ROS Jade, see $(lsb_release -sc) instead of artful
+	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu artful main" > /etc/apt/sources.list.d/ros-latest.list'
 	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
 	$SUDO apt-get -y update
 	$SUDO apt-get install -y ros-kinetic-ros
