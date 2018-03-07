@@ -131,9 +131,9 @@ installfaust() {
 
 	# Update and compile Faust
 	cd faust
-	git checkout faust2
+	git checkout master-dev
 	git pull
-	make world
+	make 
 	$SUDO make install
 	cd ..
 
