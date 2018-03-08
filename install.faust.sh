@@ -93,15 +93,6 @@ function install_bela {
 }
 
 ####################################################
-# make world recovery 
-function try_llvm {
- 	echo "###################### trying using LLVM_CONFIG..."
-	cd build/faustdir && cmake .. -DLLVM_CONFIG=on
-	cd ../..
-	make world
-}
-
-####################################################
 # Install Android
 function install_android {
  	echo "###################### Install Android..."
@@ -139,6 +130,15 @@ function install_android {
 		chmod +x install-cmake.sh
 		$SUDO ./install-cmake.sh
     fi
+}
+
+####################################################
+# make world recovery 
+function try_llvm {
+ 	echo "###################### try to use LLVM_CONFIG..."
+	cd build/faustdir && cmake .. -DLLVM_CONFIG=on
+	cd ../..
+	make world
 }
 
 ####################################################
