@@ -43,6 +43,7 @@ function installserver {
 	$SUDO sed -i s%HOME%$MYHOME%g /etc/apache2/sites-available/001-faust.conf
 	$SUDO sed -i s%www-data%$MYSELF%g /etc/apache2/envvars
 
+	# remove previous ANDROID definitions
 	grep -v ANDROID_ /etc/apache2/envvars > tmp$$
 	$SUDO mv -f tmp$$ /etc/apache2/envvars
 	
@@ -54,6 +55,7 @@ ANDROID_HOME=/opt/android/sdk
 ANDROID_SDK_ROOT=/opt/android/sdk
 ANDROID_NDK_ROOT=/opt/android/ndk
 ANDROID_NDK_HOME=/opt/android/ndk
+
 !
 
 	$SUDO a2ensite 001-faust.conf

@@ -4,11 +4,11 @@ set -e
 function installonlinecompiler {
 	SUDO=`which sudo`
 
-	echo "Installing Faust Online Compiler"
+	echo "########################### Installing Faust Online Compiler"
 
 	# Check requirements
 	if [ ! -d ~/FaustInstall ]; then
-		echo "Please install faust before by running install.developer.sh"
+		echo "Please install faust before by running install.faust.sh"
 		exit 1
 	fi
 	if [ ! -d ~/www ]; then
@@ -18,25 +18,23 @@ function installonlinecompiler {
 
 	if [ ! -d ~/www/onlinecompiler ]; then
 		cd ~/www/
-		echo "Clone onlinecompiler"
+		echo "########################### Clone onlinecompiler"
 		git clone https://github.com/grame-cncm/onlinecompiler.git
 	fi
 
-	echo "Update onlinecompiler"
+	echo "########################### Update onlinecompiler"
 	cd ~/www/onlinecompiler
 	git pull
 
-	echo "Create if needed tmp directory for sessions"
 	if [ ! -d tmp ]; then
+		echo "########################### Create tmp directory for sessions"
 		mkdir tmp
 	fi
 	
-	echo "Install PHP and qrencode"
+	echo "########################### Install PHP and qrencode"
 	$SUDO apt-get install -y php libapache2-mod-php qrencode
-
 	
 	echo "Installation Done!"
-
 }
 
 installonlinecompiler
