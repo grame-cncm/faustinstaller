@@ -17,15 +17,16 @@ function installserver {
 	MYHOME=$HOME
 	MYSELF=`whoami`
 
-	echo "Updating packages and Installing Faust website dependencies..."
+	echo "############################ Updating packages and Installing Faust website dependencies..."
 	$SUDO apt-get -y update
 	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs
 
-	echo "Install Jekyll"
+	echo "############################ Install Jekyll"
 	$SUDO gem install jekyll
 
 	# Install Faust if needed
 	if [ ! -d "faustwebsite" ]; then
+	echo "############################ clone faustwebsite"
 		git clone https://github.com/grame-cncm/faustwebsite.git
 	fi
 	
@@ -42,12 +43,18 @@ function installserver {
 	$SUDO sed -i s%HOME%$MYHOME%g /etc/apache2/sites-available/001-faust.conf
 	$SUDO sed -i s%www-data%$MYSELF%g /etc/apache2/envvars
 
-	$SUDO sh -c "echo '## For Faust2Android (added by installer)' >> /etc/apache2/envvars"
-	$SUDO sh -c "echo 'ANDROID_ROOT=/opt/android' >> /etc/apache2/envvars"
-	$SUDO sh -c "echo 'ANDROID_HOME=/opt/android/sdk' >> /etc/apache2/envvars"
-	$SUDO sh -c "echo 'ANDROID_SDK_ROOT=/opt/android/sdk' >> /etc/apache2/envvars"
-	$SUDO sh -c "echo 'ANDROID_NDK_ROOT=/opt/android/ndk' >> /etc/apache2/envvars"
-	$SUDO sh -c "echo 'ANDROID_NDK_HOME=/opt/android/ndk' >> /etc/apache2/envvars"
+	grep -v ANDROID_ /etc/apache2/envvars > tmp$$
+	$SUDO mv -f tmp$$ /etc/apache2/envvars
+	
+	$SUDO cat <<!  >> /etc/apache2/envvars
+
+## For Faust2Android ANDROID_XXX definitions (added by installer)
+ANDROID_ROOT=/opt/android
+ANDROID_HOME=/opt/android/sdk
+ANDROID_SDK_ROOT=/opt/android/sdk
+ANDROID_NDK_ROOT=/opt/android/ndk
+ANDROID_NDK_HOME=/opt/android/ndk
+!
 
 	$SUDO a2ensite 001-faust.conf
 	$SUDO a2dissite 000-default.conf
@@ -57,8 +64,7 @@ function installserver {
 	$SUDO apachectl stop
 	$SUDO apachectl start
 
-
-	echo "Installation Done!"
+	echo "############################ Installation Done!"
 }
 
 installserver
