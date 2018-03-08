@@ -34,7 +34,7 @@ function install_faust2pd {
 # Install pd.dll needed to cross compile pd externals for windows
 function install_pd_dll {
 	echo "########### Install pd dll..."
-    if [ ! -d /usr/include/pd/pd.dll ]; then
+    if [ ! -f /usr/include/pd/pd.dll ]; then
         wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
         $SUDO mv pd.dll /usr/include/pd/
     fi
