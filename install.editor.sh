@@ -19,7 +19,7 @@ installfausteditor() {
 	if [ ! -d ~/www/editor ]; then
 		cd ~/www/
 		echo "Clone editor"
-		git clone https://github.com/grame-cncm/faustplayground.git editor
+		git clone https://github.com/grame-cncm/fausteditorweb.git editor
 	fi
 
 	echo "Update faustplayground"
