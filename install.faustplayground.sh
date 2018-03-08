@@ -4,7 +4,7 @@ set -e
 function installfaustplayground {
 	SUDO=`which sudo`
 
-	echo "Installing Faust Playground"
+	echo "########################### Installing Faust Playground"
 
 	# Check requirements
 	if [ ! -d ~/FaustInstall ]; then
@@ -18,16 +18,16 @@ function installfaustplayground {
 
 	if [ ! -d ~/www/faustplayground ]; then
 		cd ~/www/
-		echo "Clone faustplayground"
+		echo "########################### Clone faustplayground"
 		git clone https://github.com/grame-cncm/faustplayground.git
 	fi
 
-	echo "Update faustplayground"
+	echo "########################### Update faustplayground"
 	cd ~/www/faustplayground
 	git pull
+	git submodule update --init 
 	
 	echo "Installation Done!"
-
 }
 
 installfaustplayground
