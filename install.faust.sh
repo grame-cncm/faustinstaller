@@ -200,7 +200,7 @@ function installfaust {
 	git checkout $FAUSTBRANCH
 	git pull
 	make world || try_llvm
-	$SUDO make install
+	$SUDO make newinstall  # will be install once 'newinstall' is validated by packagers
 	cd ..
 
 	echo "Installation Done!"
