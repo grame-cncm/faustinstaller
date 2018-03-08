@@ -1,5 +1,6 @@
 	#!/bin/bash
 set -e
+set -v
 
 ####################################################
 # various settings are here
@@ -7,6 +8,7 @@ set -e
 FAUSTBRANCH=master-dev
 FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
 FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
+
 
 ####################################################
 # Install QT5 (for faust2faustvst)
@@ -21,7 +23,7 @@ function install_qt5 {
 ####################################################
 # Install faust2pd from Albert Greaf Pure-lang PPA
 function install_faust2pd {
-	echo "########### faust2pd..."
+	echo "########### Install faust2pd..."
 	$SUDO apt-get install -y software-properties-common
 	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
 	$SUDO apt-get -y update
@@ -31,7 +33,7 @@ function install_faust2pd {
 ####################################################
 # Install pd.dll needed to cross compile pd externals for windows
 function install_pd_dll {
-	echo "########### pd dll..."
+	echo "########### Install pd dll..."
     if [ ! -d /usr/include/pd/pd.dll ]; then
         wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
         $SUDO mv pd.dll /usr/include/pd/
@@ -41,7 +43,7 @@ function install_pd_dll {
 ####################################################
 # Install VST SDK
 function install_vst_sdk {
- 	echo "########### VST SDK..."
+ 	echo "########### Install VST SDK..."
    if [ ! -d /usr/local/include/vstsdk2.4 ]; then
         wget http://www.steinberg.net/sdk_downloads/vstsdk365_12_11_2015_build_67.zip
         unzip vstsdk365_12_11_2015_build_67.zip
@@ -52,7 +54,7 @@ function install_vst_sdk {
 ####################################################
 # Install MaxMSP SDK
 function install_max_sdk {
- 	echo "########### Max/MSP SDK..."
+ 	echo "########### Install Max/MSP SDK..."
 	if [ ! -d /usr/local/include/c74support ]; then
 		if [ ! -f max-sdk-7.1.0.zip ]; then
 			wget https://cycling74.com/download/max-sdk-7.1.0.zip
@@ -65,7 +67,7 @@ function install_max_sdk {
 ####################################################
 # Install ROS Jade, see $(lsb_release -sc) instead of xenial
 function install_ros {
- 	echo "########### ROS..."
+ 	echo "########### Install ROS..."
 	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
 	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
 	$SUDO apt-get -y update
@@ -75,7 +77,7 @@ function install_ros {
 ####################################################
 # Install Bela
 function install_bela {
- 	echo "########### Bela..."
+ 	echo "########### Install Bela..."
 	$SUDO apt-get install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
     if [ ! -d /usr/local/beaglert ]; then
         git clone https://github.com/BelaPlatform/Bela.git
@@ -93,7 +95,7 @@ function install_bela {
 ####################################################
 # Install Android
 function install_android {
- 	echo "########### Android..."
+ 	echo "########### Install Android..."
 	## install java 8
     $SUDO apt install -y openjdk-8-jdk
 
