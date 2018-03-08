@@ -6,7 +6,7 @@ set -e
 ####################################################
 FAUSTBRANCH=master-dev
 FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
-FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev inkscape graphviz"
+FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev"
 
 ####################################################
 # Install QT5 (for faust2faustvst)
@@ -143,6 +143,7 @@ function installfaust {
 	# Install all the needed SDK
 	$SUDO apt-get install -y $FAUSTSDKDEPENDS
 	supercollider-dev wget unzip libboost-dev
+	$SUDO apt-get install -y inkscape graphviz
 
     # install QT5 for faust2faustvst
     install_qt5
