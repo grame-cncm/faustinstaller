@@ -5,8 +5,8 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
-FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
+FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
+FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
 
 
 ####################################################
@@ -33,9 +33,10 @@ install_faust2pd() {
 # Install pd.dll needed to cross compile pd externals for windows
 install_pd_dll() {
 	echo "###################### Install pd dll..."
-    if [ ! -f /usr/include/pd/pd.dll ]; then
-        wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
-        $SUDO mv pd.dll /usr/include/pd/
+	$SUDO install -d /usr/lib/i686-w64-mingw32/pd
+	if [ ! -d /usr/lib/i686-w64-mingw32/pd/pd.dll ]; then
+        wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll	         
+        $SUDO mv pd.dll /usr/lib/i686-w64-mingw32/pd/
     fi
 }
 
@@ -155,8 +156,8 @@ installfaust() {
 	echo "###################### Updating packages..."
 	$SUDO apt-get -y update
 	echo "###################### Installing Faust dependencies..."
-	echo yes | $SUDO apt install -y jackd2
 	$SUDO apt-get install -y $FAUSTDEPENDS
+	[ -f /usr/bin/llvm-config ] || $SUDO ln -s /usr/bin/llvm-config-3.6 /usr/bin/llvm-config
 
 	# Install all the needed SDK
 	$SUDO apt-get install -y $FAUSTSDKDEPENDS
