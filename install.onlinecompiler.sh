@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-function installonlinecompiler {
+installonlinecompiler() {
 	SUDO=`which sudo`
 
 	echo "########################### Installing Faust Online Compiler"

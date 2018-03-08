@@ -1,4 +1,4 @@
-	#!/bin/bash
+#!/bin/bash
 set -e
 
 ####################################################
@@ -11,7 +11,7 @@ FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev li
 
 ####################################################
 # Install QT5 (for faust2faustvst)
-function install_qt5 {
+install_qt5() {
 	echo "###################### Install QT5..."
     $SUDO apt-get install -y qtbase5-dev qt5-qmake libqt5x11extras5-dev
 	if [ ! -e /usr/bin/qmake-qt5 ]; then
@@ -21,7 +21,7 @@ function install_qt5 {
 
 ####################################################
 # Install faust2pd from Albert Greaf Pure-lang PPA
-function install_faust2pd {
+install_faust2pd() {
 	echo "###################### Install faust2pd..."
 	$SUDO apt-get install -y software-properties-common
 	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
@@ -31,7 +31,7 @@ function install_faust2pd {
 
 ####################################################
 # Install pd.dll needed to cross compile pd externals for windows
-function install_pd_dll {
+install_pd_dll() {
 	echo "###################### Install pd dll..."
     if [ ! -f /usr/include/pd/pd.dll ]; then
         wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
@@ -41,7 +41,7 @@ function install_pd_dll {
 
 ####################################################
 # Install VST SDK
-function install_vst_sdk {
+install_vst_sdk() {
  	echo "###################### Install VST SDK..."
    if [ ! -d /usr/local/include/vstsdk2.4 ]; then
         wget http://www.steinberg.net/sdk_downloads/vstsdk365_12_11_2015_build_67.zip
@@ -52,7 +52,7 @@ function install_vst_sdk {
 
 ####################################################
 # Install MaxMSP SDK
-function install_max_sdk {
+install_max_sdk() {
  	echo "###################### Install Max/MSP SDK..."
 	if [ ! -d /usr/local/include/c74support ]; then
 		if [ ! -f max-sdk-7.1.0.zip ]; then
@@ -65,7 +65,7 @@ function install_max_sdk {
 
 ####################################################
 # Install ROS Jade, see $(lsb_release -sc) instead of xenial
-function install_ros {
+install_ros() {
  	echo "###################### Install ROS..."
 	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
 	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
@@ -75,7 +75,7 @@ function install_ros {
 
 ####################################################
 # Install Bela
-function install_bela {
+install_bela() {
  	echo "###################### Install Bela..."
 	$SUDO apt-get install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
     if [ ! -d /usr/local/beaglert ]; then
@@ -93,7 +93,7 @@ function install_bela {
 
 ####################################################
 # Install Android
-function install_android {
+install_android() {
  	echo "###################### Install Android..."
 	## install java 8
     $SUDO apt install -y openjdk-8-jdk
@@ -133,7 +133,7 @@ function install_android {
 
 ####################################################
 # make world recovery 
-function try_llvm {
+try_llvm() {
  	echo "###################### try to use LLVM_CONFIG..."
 	cd build/faustdir && cmake .. -DLLVM_CONFIG=on
 	cd ../..
@@ -141,7 +141,7 @@ function try_llvm {
 }
 
 ####################################################
-function installfaust {
+installfaust() {
 	# Install 'Installation directory' if needed
 	[ -d ~/FaustInstall ] || mkdir ~/FaustInstall
 	cd ~/FaustInstall
