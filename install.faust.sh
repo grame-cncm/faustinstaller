@@ -5,7 +5,7 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
+FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
 FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
 
 
@@ -157,7 +157,7 @@ installfaust() {
 	$SUDO apt-get -y update
 	echo "###################### Installing Faust dependencies..."
 	$SUDO apt-get install -y $FAUSTDEPENDS
-	[ -f /usr/bin/llvm-config ] || $SUDO ln -s /usr/bin/llvm-config-3.6 /usr/bin/llvm-config
+	[ -f /usr/bin/llvm-config ] || $SUDO ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config
 
 	# Install all the needed SDK
 	$SUDO apt-get install -y $FAUSTSDKDEPENDS
