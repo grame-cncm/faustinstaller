@@ -22,9 +22,11 @@ installfausteditor() {
 		git clone https://github.com/grame-cncm/fausteditorweb.git editor
 	fi
 
-	echo "Update faustplayground"
+	echo "Update editor"
 	cd ~/www/editor
 	git pull
+    git submodule init 
+    git submodule update
 	
 	echo "Installation Done!"
 
