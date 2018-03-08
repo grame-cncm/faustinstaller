@@ -6,7 +6,7 @@ function installfaustservice {
 
 	echo "Installing faustservice (remote compilation service)"
 
-	$SUDO apt install -y libarchive-dev libboost-all-dev
+	$SUDO apt install -y libarchive-dev libboost-all-dev apache2
 
 	# Check requirements
 	if [ ! -d ~/FaustInstall ]; then
@@ -17,7 +17,6 @@ function installfaustservice {
 	if [ ! -d ~/FaustInstall/faustservice ]; then
 		cd ~/FaustInstall
 		git clone https://github.com/grame-cncm/faustservice.git
-	exit 1
 	fi
 
 	echo "Update faustservice"
