@@ -7,6 +7,8 @@ log=install.log
 # install faust and associated services
 ./install.faust.sh
 echo
+./install.android.sh
+echo
 ./install.faustwebsite.sh
 echo
 ./install.faustservice.sh
