@@ -31,7 +31,7 @@ install_faust2pd() {
 
 ####################################################
 # Install pd.dll needed to cross compile pd externals for windows
-function install_pd_dll {
+install_pd_dll() {
 	echo "###################### Install pd dll..."
 	if [ ! -d /usr/lib/i686-w64-mingw32/pd/pd.dll ]; then
  # don't fetch the dll from the faust website any more
@@ -93,46 +93,6 @@ install_bela() {
         tar xzf xenomai.tgz
         $SUDO mv xenomai /usr/arm-linux-gnueabihf/include/
         cd $currentdir
-    fi
-}
-
-####################################################
-# Install Android
-function install_android {
- 	echo "###################### Install Android..."
-	## install java 8
-    $SUDO apt install -y openjdk-8-jdk
-
-	## install android sdk
-    if [ ! -d /opt/android ]; then
-        $SUDO install -d /opt/android
-
-        if [ ! -f android-sdk_r24.4.1-linux.tgz ]; then
-            wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-        fi
-        if [ ! -d /opt/android/sdk ]; then
-            tar -xzf android-sdk_r24.4.1-linux.tgz
-            $SUDO mv android-sdk-linux/ /opt/android/sdk
-        fi
-		export ANDROID_HOME="/opt/android/sdk"
-
-        ## install android ndk
-        if [ ! -f android-ndk-r12-linux-x86_64.zip ]; then
-            wget https://dl.google.com/android/repository/android-ndk-r12-linux-x86_64.zip
-        fi
-
-        if [ ! -d /opt/android/ndk ]; then
-            unzip -q android-ndk-r12-linux-x86_64.zip
-            $SUDO mv android-ndk-r12 /opt/android/ndk
-        fi
-
-        export PATH="/opt/android/sdk/tools:/opt/android/sdk/platform-tools:/opt/android/ndk:$PATH"
-        echo y |
-
-		# install missing cmake for android
-		wget https://github.com/Commit451/android-cmake-installer/releases/download/1.1.0/install-cmake.sh
-		chmod +x install-cmake.sh
-		$SUDO ./install-cmake.sh
     fi
 }
 
