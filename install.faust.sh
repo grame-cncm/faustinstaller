@@ -5,7 +5,7 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
+FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
 FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
 INSTALLDIR=$(pwd)
 
@@ -37,7 +37,7 @@ function install_pd_dll {
  # don't fetch the dll from the faust website any more
  # it fails regularly and will especially fail if the faust site is not available 
  #       wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
-        $SUDO mv $INSTALLDIR/rsrc/pd.dll /usr/include/pd/
+        $SUDO cp $INSTALLDIR/rsrc/pd.dll /usr/include/pd/
     fi
 }
 
@@ -145,7 +145,7 @@ function try_llvm {
 	then
 		LLVM_CONFIG=llvm-config 
 	else
-		LLVM_CONFIG=$(find /usr/bin -name 'llvm-configg*' | sed -e 's/\/usr\/bin\///')
+		LLVM_CONFIG=$(find /usr/bin -name 'llvm-config*' | sed -e 's/\/usr\/bin\///')
 	fi
 	which $LLVM_CONFIG > /dev/null || (echo "cannot find llvm-config (or derived)"; exit 1)
 	
@@ -218,6 +218,7 @@ function installfaust {
 	git pull
 	make world || try_llvm
 	$SUDO make newinstall  # will be install once 'newinstall' is validated by packagers
+	faust -v
 	cd ..
 
 	echo "Installation Done!"
