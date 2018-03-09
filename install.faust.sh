@@ -140,7 +140,16 @@ function install_android {
 # make world recovery 
 function try_llvm {
  	echo "###################### try to use LLVM_CONFIG..."
-	cd build/faustdir && cmake .. -DLLVM_CONFIG=on
+	# find llvm-config
+	if [ -x /usr/bin/llvm-config ] 
+	then
+		LLVM_CONFIG=llvm-config 
+	else
+		LLVM_CONFIG=$(find /usr/bin -name 'llvm-configg*' | sed -e 's/\/usr\/bin\///')
+	fi
+	which $LLVM_CONFIG > /dev/null || (echo "cannot find llvm-config (or derived)"; exit 1)
+	
+	cd build/faustdir && cmake .. -DUSE_LLVM_CONFIG=on -DLLVM_CONFIG=$LLVM_CONFIG
 	cd ../..
 	make world
 }
@@ -196,7 +205,11 @@ function installfaust {
 	# Install Latex
     $SUDO apt-get install -y texlive-full
 
+	# check llvm-config
+	
+
 	# Install Faust if needed
+	echo "###################### Install faust..."
 	[ -d "faust" ] || git clone https://github.com/grame-cncm/faust.git
 
 	# Update and compile Faust
