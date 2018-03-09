@@ -44,6 +44,12 @@ install_android() {
 	export ANDROID_HOME="/home/orlarey/FaustInstall/android/"
 	export ANDROID_NDK_HOME="/home/orlarey/FaustInstall/android/ndk-bundle/"
 
+	## Add these variables to .profile
+	echo '# Settings for faust2android (added by install.android.sh) ' >> /home/orlarey/.profile
+	echo 'export ANDROID_HOME="/home/orlarey/FaustInstall/android/"' >> /home/orlarey/.profile
+	echo 'export ANDROID_NDK_HOME="/home/orlarey/FaustInstall/android/ndk-bundle/"' >> /home/orlarey/.profile
+
+
 	## This is required by faust2android
 	$SUDO install -d /opt/android/
 	$SUDO ln -s $ANDROID_HOME /opt/android/sdk
