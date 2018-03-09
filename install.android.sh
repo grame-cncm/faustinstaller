@@ -28,11 +28,11 @@ install_android() {
 
 	## install licenses
 	mkdir licenses
-	echo '601085b94cd77f0b54ff86406957099ebe79c4d6' > licenses/android-googletv-license
-	echo 'd56f5187479451eabf01fb78af6dfcb131a6481e' > licenses/android-sdk-license
-	echo '84831b9409646a918e30573bab4c9c91346d8abd' > licenses/android-sdk-preview-license
-	echo '33b6a2b64607f11b759f320ef9dff4ae5c47d97a' > licenses/google-gdk-license
-	echo 'e9acab5b5fbb560a72cfaecce8946896ff6aab9d' > licenses/mips-android-sysimage-license
+	echo '601085b94cd77f0b54ff86406957099ebe79c4d6' > /home/orlarey/FaustInstall/android/licenses/android-googletv-license
+	echo 'd56f5187479451eabf01fb78af6dfcb131a6481e' > /home/orlarey/FaustInstall/android/licenses/android-sdk-license
+	echo '84831b9409646a918e30573bab4c9c91346d8abd' > /home/orlarey/FaustInstall/android/licenses/android-sdk-preview-license
+	echo '33b6a2b64607f11b759f320ef9dff4ae5c47d97a' > /home/orlarey/FaustInstall/android/licenses/google-gdk-license
+	echo 'e9acab5b5fbb560a72cfaecce8946896ff6aab9d' > /home/orlarey/FaustInstall/android/licenses/mips-android-sysimage-license
 
 	./tools/bin/sdkmanager "build-tools;25.0.3" 
 	./tools/bin/sdkmanager "cmake;3.6.4111459" 
