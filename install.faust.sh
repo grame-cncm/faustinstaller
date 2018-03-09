@@ -7,7 +7,7 @@ set -e
 FAUSTBRANCH=master-dev
 FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.6 llvm-3.6-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
 FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
-
+INSTALLDIR=$(pwd)
 
 ####################################################
 # Install QT5 (for faust2faustvst)
@@ -88,10 +88,11 @@ function install_bela {
     if [ ! -d /usr/arm-linux-gnueabihf/include/xenomai ]; then
         # install xenomia (should be downloaded from an official place)
 #        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
-        cd rsrc
+		currentdir=$(pwd)
+        cd $INSTALLDIR/rsrc
         tar xzf xenomai.tgz
         $SUDO mv xenomai /usr/arm-linux-gnueabihf/include/
-        cd ..
+        cd $currentdir
     fi
 }
 
