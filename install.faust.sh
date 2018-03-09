@@ -7,7 +7,7 @@ set -e
 FAUSTBRANCH=master-dev
 FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
 FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
-
+INSTALLDIR=$(pwd)
 
 ####################################################
 # Install QT5 (for faust2faustvst)
@@ -33,10 +33,11 @@ install_faust2pd() {
 # Install pd.dll needed to cross compile pd externals for windows
 install_pd_dll() {
 	echo "###################### Install pd dll..."
-	$SUDO install -d /usr/lib/i686-w64-mingw32/pd
 	if [ ! -d /usr/lib/i686-w64-mingw32/pd/pd.dll ]; then
-        wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll	         
-        $SUDO mv pd.dll /usr/lib/i686-w64-mingw32/pd/
+ # don't fetch the dll from the faust website any more
+ # it fails regularly and will especially fail if the faust site is not available 
+ #       wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
+        $SUDO cp $INSTALLDIR/rsrc/pd.dll /usr/include/pd/
     fi
 }
 
@@ -86,9 +87,12 @@ install_bela() {
 
     if [ ! -d /usr/arm-linux-gnueabihf/include/xenomai ]; then
         # install xenomia (should be downloaded from an official place)
-        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
+#        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
+		currentdir=$(pwd)
+        cd $INSTALLDIR/rsrc
         tar xzf xenomai.tgz
         $SUDO mv xenomai /usr/arm-linux-gnueabihf/include/
+        cd $currentdir
     fi
 }
 
@@ -96,7 +100,16 @@ install_bela() {
 # make world recovery 
 try_llvm() {
  	echo "###################### try to use LLVM_CONFIG..."
-	cd build/faustdir && cmake .. -DLLVM_CONFIG=on
+	# find llvm-config
+	if [ -x /usr/bin/llvm-config ] 
+	then
+		LLVM_CONFIG=llvm-config 
+	else
+		LLVM_CONFIG=$(find /usr/bin -name 'llvm-config*' | sed -e 's/\/usr\/bin\///')
+	fi
+	which $LLVM_CONFIG > /dev/null || (echo "cannot find llvm-config (or derived)"; exit 1)
+	
+	cd build/faustdir && cmake .. -DUSE_LLVM_CONFIG=on -DLLVM_CONFIG=$LLVM_CONFIG
 	cd ../..
 	make world
 }
@@ -150,6 +163,7 @@ installfaust() {
     $SUDO apt-get install -y texlive-full
 
 	# Install Faust if needed
+	echo "###################### Install faust..."
 	[ -d "faust" ] || git clone https://github.com/grame-cncm/faust.git
 
 	# Update and compile Faust
@@ -158,6 +172,7 @@ installfaust() {
 	git pull
 	make world || try_llvm
 	$SUDO make newinstall  # will be install once 'newinstall' is validated by packagers
+	faust -v
 	cd ..
 
 	echo "Installation Done!"
