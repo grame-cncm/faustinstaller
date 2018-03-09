@@ -87,9 +87,11 @@ function install_bela {
 
     if [ ! -d /usr/arm-linux-gnueabihf/include/xenomai ]; then
         # install xenomia (should be downloaded from an official place)
-        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
+#        wget http://faust.grame.fr/xenomai.tgz || wget http://ifaust.grame.fr/xenomai.tgz
+        cd rsrc
         tar xzf xenomai.tgz
         $SUDO mv xenomai /usr/arm-linux-gnueabihf/include/
+        cd ..
     fi
 }
 
