@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-function installserver {
+installserver() {
 	# Install 'Installation directory' if needed
 	if [ ! -d ~/FaustInstall ]; then
 		mkdir ~/FaustInstall

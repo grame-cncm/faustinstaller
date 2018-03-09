@@ -1,17 +1,17 @@
-	#!/bin/bash
+#!/bin/bash
 set -e
 
 ####################################################
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common"
-FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl qt4-default libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
-INSTALLDIR=$(pwd)
+FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
+FAUSTSDKDEPENDS="libgtk2.0-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev qjackctl libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
+
 
 ####################################################
 # Install QT5 (for faust2faustvst)
-function install_qt5 {
+install_qt5() {
 	echo "###################### Install QT5..."
     $SUDO apt-get install -y qtbase5-dev qt5-qmake libqt5x11extras5-dev
 	if [ ! -e /usr/bin/qmake-qt5 ]; then
@@ -21,7 +21,7 @@ function install_qt5 {
 
 ####################################################
 # Install faust2pd from Albert Greaf Pure-lang PPA
-function install_faust2pd {
+install_faust2pd() {
 	echo "###################### Install faust2pd..."
 	$SUDO apt-get install -y software-properties-common
 	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
@@ -33,7 +33,7 @@ function install_faust2pd {
 # Install pd.dll needed to cross compile pd externals for windows
 function install_pd_dll {
 	echo "###################### Install pd dll..."
-    if [ ! -f /usr/include/pd/pd.dll ]; then
+	if [ ! -d /usr/lib/i686-w64-mingw32/pd/pd.dll ]; then
  # don't fetch the dll from the faust website any more
  # it fails regularly and will especially fail if the faust site is not available 
  #       wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
@@ -43,7 +43,7 @@ function install_pd_dll {
 
 ####################################################
 # Install VST SDK
-function install_vst_sdk {
+install_vst_sdk() {
  	echo "###################### Install VST SDK..."
    if [ ! -d /usr/local/include/vstsdk2.4 ]; then
         wget http://www.steinberg.net/sdk_downloads/vstsdk365_12_11_2015_build_67.zip
@@ -54,7 +54,7 @@ function install_vst_sdk {
 
 ####################################################
 # Install MaxMSP SDK
-function install_max_sdk {
+install_max_sdk() {
  	echo "###################### Install Max/MSP SDK..."
 	if [ ! -d /usr/local/include/c74support ]; then
 		if [ ! -f max-sdk-7.1.0.zip ]; then
@@ -67,7 +67,7 @@ function install_max_sdk {
 
 ####################################################
 # Install ROS Jade, see $(lsb_release -sc) instead of xenial
-function install_ros {
+install_ros() {
  	echo "###################### Install ROS..."
 	$SUDO sh -c 'echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources.list.d/ros-latest.list'
 	$SUDO apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
@@ -77,7 +77,7 @@ function install_ros {
 
 ####################################################
 # Install Bela
-function install_bela {
+install_bela() {
  	echo "###################### Install Bela..."
 	$SUDO apt-get install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
     if [ ! -d /usr/local/beaglert ]; then
@@ -138,7 +138,7 @@ function install_android {
 
 ####################################################
 # make world recovery 
-function try_llvm {
+try_llvm() {
  	echo "###################### try to use LLVM_CONFIG..."
 	# find llvm-config
 	if [ -x /usr/bin/llvm-config ] 
@@ -155,7 +155,7 @@ function try_llvm {
 }
 
 ####################################################
-function installfaust {
+installfaust() {
 	# Install 'Installation directory' if needed
 	[ -d ~/FaustInstall ] || mkdir ~/FaustInstall
 	cd ~/FaustInstall
@@ -169,8 +169,8 @@ function installfaust {
 	echo "###################### Updating packages..."
 	$SUDO apt-get -y update
 	echo "###################### Installing Faust dependencies..."
-	echo yes | $SUDO apt install -y jackd2
 	$SUDO apt-get install -y $FAUSTDEPENDS
+	[ -f /usr/bin/llvm-config ] || $SUDO ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config
 
 	# Install all the needed SDK
 	$SUDO apt-get install -y $FAUSTSDKDEPENDS
@@ -199,14 +199,8 @@ function installfaust {
 	# Install Bela
 	install_bela
 
-	# Install Android development tools
-	install_android
-
 	# Install Latex
     $SUDO apt-get install -y texlive-full
-
-	# check llvm-config
-	
 
 	# Install Faust if needed
 	echo "###################### Install faust..."

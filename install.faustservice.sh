@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-function installfaustservice {
+installfaustservice() {
 	SUDO=`which sudo`
 
 	echo "Installing faustservice (remote compilation service)"
