@@ -41,8 +41,8 @@ install_android() {
 	./tools/bin/sdkmanager --licenses
 
 	## Setting required environment variables for faust2smartkeyb
-	export ANDROID_HOME="~/FaustInstall/android"
-	export ANDROID_NDK_HOME="~/FaustInstall/android/ndk-bundle"
+	export ANDROID_HOME="/home/orlarey/FaustInstall/android/"
+	export ANDROID_NDK_HOME="/home/orlarey/FaustInstall/android/ndk-bundle/"
 
 	## This is required by faust2android
 	$SUDO install -d /opt/android/
