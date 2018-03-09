@@ -37,7 +37,7 @@ function install_pd_dll {
  # don't fetch the dll from the faust website any more
  # it fails regularly and will especially fail if the faust site is not available 
  #       wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
-        $SUDO mv rsrc/pd.dll /usr/include/pd/
+        $SUDO mv $INSTALLDIR/rsrc/pd.dll /usr/include/pd/
     fi
 }
 
