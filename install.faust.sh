@@ -34,8 +34,10 @@ function install_faust2pd {
 function install_pd_dll {
 	echo "###################### Install pd dll..."
     if [ ! -f /usr/include/pd/pd.dll ]; then
-        wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
-        $SUDO mv pd.dll /usr/include/pd/
+ # don't fetch the dll from the faust website any more
+ # it fails regularly and will especially fail if the faust site is not available 
+ #       wget http://faust.grame.fr/pd.dll || wget http://ifaust.grame.fr/pd.dll
+        $SUDO mv rsrc/pd.dll /usr/include/pd/
     fi
 }
 
