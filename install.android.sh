@@ -44,14 +44,13 @@ install_android() {
 	./tools/bin/sdkmanager --licenses
 
 	## Setting required environment variables for faust2smartkeyb
-	export ANDROID_HOME="/home/orlarey/FaustInstall/android/"
-	export ANDROID_NDK_HOME="/home/orlarey/FaustInstall/android/ndk-bundle/"
+	export ANDROID_HOME=$HOME/FaustInstall/android/
+	export ANDROID_NDK_HOME=$HOME/FaustInstall/android/ndk-bundle/
 
 	## Add these variables to .profile
-	echo '# Settings for faust2android (added by install.android.sh) ' >> /home/orlarey/.profile
-	echo 'export ANDROID_HOME="/home/orlarey/FaustInstall/android/"' >> /home/orlarey/.profile
-	echo 'export ANDROID_NDK_HOME="/home/orlarey/FaustInstall/android/ndk-bundle/"' >> /home/orlarey/.profile
-
+	echo '# Settings for faust2android (added by install.android.sh) ' >> $HOME/.profile
+	echo 'export ANDROID_HOME=$HOME/FaustInstall/android/' >> $HOME/.profile
+	echo 'export ANDROID_NDK_HOME=$HOME/FaustInstall/android/ndk-bundle/' >> $HOME/.profile
 
 	## This is required by faust2android
 	$SUDO install -d /opt/android/
