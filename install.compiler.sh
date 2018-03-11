@@ -20,7 +20,8 @@ installfaust() {
 		SUDO=/usr/bin/sudo
 	fi
 
-	
+	$SUDO apt-get install -y $FAUSTDEPENDS
+
 	# Install Faust if needed
 	echo "###################### Install faust..."
 	[ -d "faust" ] || git clone https://github.com/grame-cncm/faust.git
