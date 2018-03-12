@@ -5,7 +5,7 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential cmake"
+FAUSTDEPENDS="build-essential git cmake"
 
 
 ####################################################
@@ -31,6 +31,7 @@ installfaust() {
 	git checkout $FAUSTBRANCH
 	git pull
 	make
+	make httpd
 	$SUDO make newinstall 
 	faust -v
 	cd ..
