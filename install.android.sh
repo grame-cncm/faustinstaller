@@ -21,6 +21,11 @@ install_android() {
 	if [ ! -d ~/FaustInstall/android ]; then
         install -d ~/FaustInstall/android
 	fi
+	
+	# to avoid some warnings
+	install -d $HOME/.android/repositories.cfg
+	touch $HOME/.android/repositories.cfg
+
 	cd ~/FaustInstall/android
 	wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
 
