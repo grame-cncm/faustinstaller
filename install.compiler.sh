@@ -31,7 +31,7 @@ installfaust() {
 	git checkout $FAUSTBRANCH
 	git pull
 	make
-	$SUDO make install  # can't use newinstall
+	$SUDO make newinstall 
 	faust -v
 	cd ..
 
