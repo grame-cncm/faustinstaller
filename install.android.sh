@@ -32,7 +32,7 @@ install_android() {
 	unzip sdk-tools-linux-3859397.zip
 
 	## install licenses
-	yes | sudo ./tools/bin/sdkmanager --licenses
+	yes | ./tools/bin/sdkmanager --licenses
 	
 	./tools/bin/sdkmanager "build-tools;25.0.3" 
 	./tools/bin/sdkmanager "cmake;3.6.4111459" 
