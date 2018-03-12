@@ -140,9 +140,6 @@ installsdk() {
 	# Install Bela
 	install_bela
 
-	# Install Latex
-    $SUDO apt-get install -y texlive-full
-
 	echo "SDKs Installation Done!"
 }
 

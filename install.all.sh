@@ -9,6 +9,8 @@ log=install.log
 echo
 ./install.sdk.sh
 echo
+./install.latex.sh
+echo
 ./install.android.sh
 echo
 ./install.faustwebsite.sh
