@@ -5,6 +5,7 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
+LINUXDISTRIB=`lsb_release -cs`
 FAUSTDEPENDS="build-essential g++-multilib pkg-config git libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common cmake"
 FAUSTSDKDEPENDS="libgtk2.0-dev libqt4-dev libasound2-dev libqrencode-dev portaudio19-dev libjack-jackd2-dev libcsound64-dev dssi-dev lv2-dev puredata-dev supercollider-dev wget unzip libboost-dev inkscape graphviz"
 INSTALLDIR=$(pwd)
@@ -24,7 +25,7 @@ install_qt5() {
 install_faust2pd() {
 	echo "###################### Install faust2pd..."
 	$SUDO apt-get install -y software-properties-common
-	$SUDO add-apt-repository -y ppa:dr-graef/pure-lang.xenial
+	$SUDO add-apt-repository -y "ppa:dr-graef/pure-lang.$LINUXDISTRIB"
 	$SUDO apt-get -y update
 	$SUDO apt-get install -y faust2pd faust2pd-extra
 }
