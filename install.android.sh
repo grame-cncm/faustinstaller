@@ -16,14 +16,14 @@ install_android() {
 	fi
 
 	## install java 8
-    $SUDO apt install -y openjdk-8-jdk
+    $SUDO apt install -y openjdk-8-jdk zip
 
 	if [ ! -d ~/FaustInstall/android ]; then
         install -d ~/FaustInstall/android
 	fi
 	
 	# to avoid some warnings
-	install -d $HOME/.android/repositories.cfg
+	install -d $HOME/.android/
 	touch $HOME/.android/repositories.cfg
 
 	cd ~/FaustInstall/android

@@ -5,7 +5,7 @@ set -e
 # various settings are here
 ####################################################
 FAUSTBRANCH=master-dev
-FAUSTDEPENDS="build-essential git cmake"
+FAUSTDEPENDS="build-essential git cmake libmicrohttpd-dev"
 
 
 ####################################################
@@ -20,6 +20,7 @@ installfaust() {
 		SUDO=/usr/bin/sudo
 	fi
 
+	$SUDO apt-get -y update
 	$SUDO apt-get install -y $FAUSTDEPENDS
 
 	# Install Faust if needed
