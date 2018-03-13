@@ -134,7 +134,7 @@ installsdk() {
 	install_max_sdk
 
 	# Install ROS Jade, see $(lsb_release -sc) instead of xenial
-	install_ros
+	#install_ros
 
 	# Install Bela
 	install_bela
