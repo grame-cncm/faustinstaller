@@ -27,8 +27,9 @@ install_android() {
 	touch $HOME/.android/repositories.cfg
 
 	cd ~/FaustInstall/android
-	wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
-
+	if [ ! -d ~/FaustInstall/android/sdk-tools-linux-3859397.zip ]; then
+		wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+	fi
 	unzip sdk-tools-linux-3859397.zip
 
 	## install licenses
