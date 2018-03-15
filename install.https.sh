@@ -5,7 +5,7 @@ if [ -e /usr/bin/sudo ]; then
 	SUDO=/usr/bin/sudo
 fi
 
-DOMAINS=faust.grame.fr,faustservice.grame.fr
+DOMAINS=faustcloud.grame.fr,faust.grame.fr,faustservice.grame.fr
 
 ####################################################
 function installhttps {
