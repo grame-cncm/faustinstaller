@@ -4,7 +4,8 @@ set -e
 ####################################################
 # various settings are here
 ####################################################
-FAUSTBRANCH=master-dev
+#FAUSTBRANCH=master-dev
+FAUSTBRANCH=faust-server
 FAUSTDEPENDS="build-essential git cmake libmicrohttpd-dev"
 
 
@@ -33,7 +34,8 @@ installfaust() {
 	git pull
 	make
 	make httpd
-	$SUDO make newinstall 
+	#$SUDO make newinstall 
+	$SUDO make install 
 	faust -v
 	cd ..
 
