@@ -38,9 +38,9 @@ installfaustservice() {
 echo
 ./install.sdk.sh
 echo
-./install.latex.sh
+#./install.latex.sh
 echo
-./install.android.sh
+#./install.android.sh
 echo
 # ./install.faustwebsite.sh
 # echo

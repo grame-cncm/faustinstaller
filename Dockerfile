@@ -13,7 +13,7 @@ RUN apt-get install -y qtbase5-dev qt5-qmake libqt5x11extras5-dev
 RUN apt-get install -y openjdk-8-jdk zip libarchive-dev libboost-all-dev
 
 
-
+ls -al
 
 #USER faust
 RUN cd /home/faust; git clone https://github.com/grame-cncm/faustinstaller.git; cd faustinstaller;  ./install.docker.sh
