@@ -17,3 +17,6 @@ RUN apt-get install -y openjdk-8-jdk zip libarchive-dev libboost-all-dev
 
 #USER faust
 RUN cd /home/faust; git clone https://github.com/grame-cncm/faustinstaller.git; cd faustinstaller;  ./install.docker.sh
+EXPOSE 8080
+WORKDIR /root/FaustInstall/faustservice
+CMD ./faustweb --port 8080
