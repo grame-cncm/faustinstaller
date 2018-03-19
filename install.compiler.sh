@@ -21,7 +21,7 @@ installfaust() {
 		SUDO=/usr/bin/sudo
 	fi
 
-	$SUDO apt-get -y update
+	$SUDO apt-get update
 	$SUDO apt-get install -y $FAUSTDEPENDS
 
 	# Install Faust if needed
