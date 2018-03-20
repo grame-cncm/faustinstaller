@@ -79,6 +79,9 @@ ln -s /android/ndk-bundle /opt/android/ndk
 # Now we can clone and compile all the Faust related git repositories
 ########################################################################
 
+# Force regeneration
+RUN ls -a 
+
 # faustservice first as it changes less often
 RUN git clone https://github.com/grame-cncm/faustservice.git; \
 git -C faustservice checkout server; \
@@ -94,8 +97,8 @@ make -C faust install
 ########################################################################
 # And starts Faustservice
 ########################################################################
-
+ENV GRADLE_USER_HOME=/tmp/gradle
 EXPOSE 8080
 WORKDIR /faustservice
-CMD ./faustweb --port 8080
+CMD ./faustweb --port 8080 --sessions-dir /tmp/sessions
 
