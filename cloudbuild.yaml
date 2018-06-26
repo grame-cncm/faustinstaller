@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['pull', 'gcr.io/faust/faustservice:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '--cache-from',
+            'gcr.io/faust/faustservice:latest',
+            '-t', 'gcr.io/$PROJECT_ID/latest-image:latest',
+            '.'
+        ]
+images: ['gcr.io/faust/faustservice:latest']
