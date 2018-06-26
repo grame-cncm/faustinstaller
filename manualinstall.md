@@ -10,9 +10,8 @@ Here are the steps starting from a fresh ubuntu 16.04 image:
     sudo apt-get install -y build-essential git cmake libmicrohttpd-dev
     git clone https://github.com/grame-cncm/faust.git
     cd faust
-    make -C build confighttp
     make
-    sudo make newinstall
+    sudo make install
 
 Once you have complete the installation, you can test it:
 
@@ -27,7 +26,7 @@ will compile noise.dsp into a C++ class implementing a white noise generator. Th
 ## Compiling Alsa and Jack applications
 In order to compile Faust programs to Alsa or Jack applications for Linux you need to install the corresponding development packages:
 
-    sudo apt-get install -y libasound2-dev ibjack-jackd2-dev libgtk2.0-dev
+    sudo apt-get install -y libasound2-dev libjack-jackd2-dev libgtk2.0-dev
 
 It is now possible to compile an Alsa or Jack application with the various possible options:
 
