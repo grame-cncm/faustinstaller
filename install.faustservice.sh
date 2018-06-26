@@ -10,7 +10,7 @@ installfaustservice() {
 
 	# Check requirements
 	if [ ! -d ~/FaustInstall ]; then
-		echo "Please install faust before by running install.developer.sh"
+		echo "Please install faust before by running install.faustservice.sh"
 		exit 1
 	fi
 
@@ -21,6 +21,7 @@ installfaustservice() {
 
 	echo "Update faustservice"
 	cd ~/FaustInstall/faustservice
+	git checkout server
 	git pull
 	make
 	$SUDO make install
