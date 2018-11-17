@@ -2,13 +2,13 @@
 ########################################################################
 ########################################################################
 #
-#                   Faust-Ready Ubuntu 16.04
+#                   Faust-Ready Ubuntu 18.04
 #                 
 #
 ########################################################################
 ########################################################################
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 RUN apt-get update
 
 ########################################################################
@@ -17,11 +17,11 @@ RUN apt-get update
 
 # We first install all the ubuntu packages
 RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends \
-build-essential pkg-config git cmake libmicrohttpd-dev llvm-3.8 llvm-3.8-dev libssl-dev \
+build-essential pkg-config git cmake libmicrohttpd-dev llvm-7 llvm-7-dev libssl-dev \
 software-properties-common zip unzip wget ncurses-dev libsndfile-dev libedit-dev libcurl4-openssl-dev vim-common \
 libasound2-dev libjack-jackd2-dev libgtk2.0-dev libqt4-dev \
 ladspa-sdk dssi-dev lv2-dev libboost-dev libcsound64-dev supercollider-dev puredata-dev \
-inkscape graphviz qtbase5-dev qt5-qmake libqt5x11extras5-dev texlive-full \
+inkscape graphviz qtbase5-dev qt5-qmake libqt5x11extras5-dev \
 libarchive-dev libboost-all-dev \
 php libapache2-mod-php qrencode highlight apache2 ruby ruby-dev nodejs \
 openjdk-8-jdk g++-mingw-w64 g++-multilib
