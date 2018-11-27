@@ -19,4 +19,7 @@ Two directories are created:
 - `~/FaustInstall`: were all gits and resources are placed
 - `~/www`: were the web pages are installed
 
+# Installing everything on a virtual machine
 
+- `git clone https://github.com/grame-cncm/faustinstaller.git`
+- 
