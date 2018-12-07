@@ -53,3 +53,26 @@ and then to build the faustservice image:
 And run it:
 
     docker run -p 8080:8080 57271bc51321
+
+### Log into a running image
+
+First list running containers, then open a terminal into one of the containers:
+
+    docker ps
+    docker exec -it <container name> /bin/bash
+
+### Kill a running container
+
+    docker kill <container name>
+
+### Create an image from a running container
+The goal is to run an android compilation on the container to force gradle update and speedup subsequent compilations
+
+    docker ps
+    docker commit 6da0477dc33c faustservice-ubuntu-1604-tuned:001
+    docker push grame/faustservice-ubuntu-1604-tuned:001
+
+## deploy on google cloud
+
+    docker pull grame/faustservice-ubuntu-1604-tuned:001
+

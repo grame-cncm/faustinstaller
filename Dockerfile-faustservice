@@ -14,18 +14,16 @@ FROM faust-ready-ubuntu:1604
 # Now we can clone and compile all the Faust related git repositories
 ########################################################################
 
-# Force regeneration
-RUN ls -a
-RUN ls -a
+RUN echo "CHANGE THIS NUMBER TO FORCE REGENERATION : 002"
 
 # faustservice first as it changes less often
-RUN git clone https://github.com/grame-cncm/faustservice.git; \
-git -C faustservice checkout server; \
+RUN git clone -n https://github.com/grame-cncm/faustservice.git; \
+git -C faustservice checkout 5774a276e2eff65300424d1036415773272c7732; \
 make -C faustservice
 
 # then the faust compiler itself
-RUN git clone https://github.com/grame-cncm/faust.git; \
-git -C faust checkout faust-server; \
+RUN git clone -n https://github.com/grame-cncm/faust.git; \
+git -C faust checkout 6330557c5dc13c7c9fbf2ad352c15b64aaa454ef; \
 make -C faust; \
 make -C faust install
 
