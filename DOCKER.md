@@ -44,7 +44,7 @@ Will ask for identifier and password.
 
 Use this commande to build the Faust Ready Ubuntu 16.04 image. The next step is to tag it:
 
-    docker tag 642bf761dbd9 faust-ready-ubuntu:1604
+    docker tag 642bf761dbd9 grame/faust-ready-ubuntu:1604
 
 and then to build the faustservice image:
 
@@ -61,6 +61,10 @@ First list running containers, then open a terminal into one of the containers:
     docker ps
     docker exec -it <container name> /bin/bash
 
+Copy content to docker container:
+
+    docker cp build.gradle 81d552f72883:/
+
 ### Kill a running container
 
     docker kill <container name>
@@ -76,3 +80,19 @@ The goal is to run an android compilation on the container to force gradle updat
 
     docker pull grame/faustservice-ubuntu-1604-tuned:001
 
+
+## nouvelle installation des packages android
+
+    android/tools/bin/sdkmanager "build-tools;28.0.3"  "cmake;3.6.4111459" "extras;android;m2repository" "ndk-bundle" "patcher;v4" "platform-tools" "platforms;android-25"  "platforms;android-27" "tools" 
+
+build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | build-tools/25.0.3/         
+  build-tools;28.0.3          | 28.0.3       | Android SDK Build-Tools 28.0.3 | build-tools/28.0.3/         
+  cmake;3.6.4111459           | 3.6.4111459  | CMake 3.6.4111459              | cmake/3.6.4111459/          
+  emulator                    | 27.1.12      | Android Emulator               | emulator/                   
+  extras;android;m2repository | 47.0.0       | Android Support Repository     | extras/android/m2repository/
+  ndk-bundle                  | 16.1.4479499 | NDK                            | ndk-bundle/                 
+  patcher;v4                  | 1            | SDK Patch Applier v4           | patcher/v4/                 
+  platform-tools              | 27.0.1       | Android SDK Platform-Tools     | platform-tools/             
+  platforms;android-25        | 3            | Android SDK Platform 25        | platforms/android-25/       
+  platforms;android-27        | 1            | Android SDK Platform 27        | platforms/android-27/       
+  tools                       | 26.1.1       | Android SDK Tools              | tools/                      

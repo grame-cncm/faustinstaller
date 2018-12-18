@@ -29,19 +29,19 @@ install_android() {
 	cd ~/FaustInstall/android
 	if [ ! -d ~/FaustInstall/android/sdk-tools-linux-3859397.zip ]; then
 		wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+		
 	fi
 	unzip sdk-tools-linux-3859397.zip
 
 	## install licenses
 	yes | ./tools/bin/sdkmanager --licenses
 	
-	./tools/bin/sdkmanager "build-tools;25.0.3" 
+	./tools/bin/sdkmanager "build-tools;28.0.3" 
 	./tools/bin/sdkmanager "cmake;3.6.4111459" 
-	./tools/bin/sdkmanager "emulator" 					## needed ????
 	./tools/bin/sdkmanager "extras;android;m2repository"
 	./tools/bin/sdkmanager "ndk-bundle" 
 	./tools/bin/sdkmanager "patcher;v4" 
-	./tools/bin/sdkmanager "platform-tools"
+	./tools/bin/sdkmanager "platform-tools;28.0.1"
 	./tools/bin/sdkmanager "platforms;android-25" 
 	./tools/bin/sdkmanager "platforms;android-27" 
 	./tools/bin/sdkmanager "tools" 
