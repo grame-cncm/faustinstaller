@@ -53,6 +53,8 @@ and then to build the faustservice image:
 And run it:
 
     docker run -p 8080:8080 57271bc51321
+    docker run -d -p 80:8080 grame/faustservice-ubuntu-1604-tris-tuned:002
+    docker run -d --restart on-failure -p 80:8080 grame/faustservice-ubuntu-1604-tris-tuned:002
 
 ### Log into a running image
 
