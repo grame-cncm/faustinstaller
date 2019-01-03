@@ -1,0 +1,49 @@
+
+########################################################################
+########################################################################
+#
+#       Faustservice (remote Faust compiler) in a docker
+#                 (L. Champenois & Y. Orlarey)
+#
+########################################################################
+########################################################################
+
+FROM grame/faustready-ubuntu-1604:003
+
+########################################################################
+# Now we can clone and compile all the Faust related git repositories
+########################################################################
+
+RUN echo "CHANGE THIS NUMBER TO FORCE REGENERATION : 002"
+
+
+# faustservice first as it changes less often
+RUN git clone -n https://github.com/grame-cncm/faustservice.git; \
+git -C faustservice checkout server; \
+make -C faustservice
+
+# then the faust compiler itself (fast cloning from DF)
+RUN git clone --single-branch --recurse-submodules --depth 1 https://github.com/grame-cncm/faust.git; \
+make -C faust; \
+make -C faust install
+
+
+########################################################################
+# Tune image by forcing Gradle upgrade
+########################################################################
+ENV GRADLE_USER_HOME=/tmp/gradle
+
+RUN echo "process=+;" > tmp.dsp; \
+faust2android tmp.dsp; \
+faust2smartkeyb -android tmp.dsp; \
+rm tmp.apk
+
+
+########################################################################
+# And starts Faustservice
+########################################################################
+EXPOSE 80
+WORKDIR /faustservice
+RUN cp ./bin/dockerOSX /usr/local/bin/; rm -rf makefiles/osx; mv makefiles/dockerosx makefiles/osx
+CMD ./faustweb --port 80 --sessions-dir /tmp/sessions
+

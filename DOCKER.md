@@ -98,3 +98,8 @@ build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | bu
   platforms;android-25        | 3            | Android SDK Platform 25        | platforms/android-25/       
   platforms;android-27        | 1            | Android SDK Platform 27        | platforms/android-27/       
   tools                       | 26.1.1       | Android SDK Tools              | tools/                      
+
+
+# new stuff
+
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 8888:80 grame/faustservice-ubuntu-1604-five-tuned :latest
