@@ -103,3 +103,30 @@ build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | bu
 # new stuff
 
 docker run -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 8888:80 grame/faustservice-ubuntu-1604-five-tuned :latest
+
+
+# On Google Compute Engine
+
+## Creating the VM from scratch
+
+Assuming a VM created from the docker image:  `eu.gcr.io/faust-cloud-208407/faust-cross-osx:latest`
+
+- first we need to pull the `faustservice` image:
+    ```
+    docker pull grame/faustservice-ubuntu-1604-five-tuned:latest
+    ```
+
+- then we need to tag it with the name assumed by faustservice (to be changed)
+    ```
+    docker tag eu.gcr.io/faust-cloud-208407/faust-cross-osx:latest faust:cross-osx
+    ```
+
+- then we need to create the shared folder that will be used to communicate between the two docker images:
+    ```
+    mkdir /tmp/sharedfaustfolder
+    ```
+
+- and finally we can start `faustservice`:
+    ```
+    docker run -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 80:80 grame/faustservice-ubuntu-1604-five-tuned:latest
+    ```
