@@ -10,10 +10,6 @@ log=install.log
 echo
 ./install.faustwebsite.sh
 echo
-./install.faustservice.sh
-echo
-./install.onlinecompiler.sh
-echo
 ./install.faustplayground.sh
 echo
 ./install.editor.sh

@@ -128,5 +128,5 @@ Assuming a VM created from the docker image:  `eu.gcr.io/faust-cloud-208407/faus
 
 - and finally we can start `faustservice`:
     ```
-    docker run -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 80:80 grame/faustservice-ubuntu-1604-five-tuned:latest
+    docker run --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 80:80 grame/faustservice-ubuntu-1604-five-tuned:latest
     ```
