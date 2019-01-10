@@ -19,8 +19,11 @@ installserver() {
 
 	echo "############################ Updating packages and Installing Faust website dependencies..."
 	$SUDO apt-get -y update
-	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs pandoc
+	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs
 
+	wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
+	$SUDO dpkg -i pandoc-2.5-1-amd64.deb
+	
 	echo "############################ Install Jekyll"
 	$SUDO gem install jekyll
 
