@@ -130,3 +130,16 @@ Assuming a VM created from the docker image:  `eu.gcr.io/faust-cloud-208407/faus
     ```
     docker run --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 80:80 grame/faustservice-ubuntu-1604-five-tuned:latest
     ```
+
+# Stuff 9/1/2018
+
+Update of faustservice and test with docker
+
+    docker run -it faustservice-with-crash2 /bin/bash
+    git pull
+    make
+    exit
+
+    docker commit 0431e19b6630 faustservice-with-crash3
+
+    docker run -d --restart=on-failure -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 8888:80 faustservice-with-crash3 ./faustweb -p 80
