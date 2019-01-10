@@ -19,7 +19,7 @@ installserver() {
 
 	echo "############################ Updating packages and Installing Faust website dependencies..."
 	$SUDO apt-get -y update
-	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs
+	$SUDO apt-get install -y -y build-essential git apache2 ruby ruby-dev nodejs pandoc
 
 	echo "############################ Install Jekyll"
 	$SUDO gem install jekyll
@@ -27,7 +27,7 @@ installserver() {
 	# Install Faust if needed
 	if [ ! -d "faustwebsite" ]; then
 	echo "############################ clone faustwebsite"
-		git --recursive clone https://github.com/grame-cncm/faustwebsite.git
+		git clone -b newwebsite --recurse-submodules https://github.com/grame-cncm/faustwebsite.git
 	fi
 	
 	if [ ! -d ~/www ]; then
@@ -36,8 +36,7 @@ installserver() {
 
 	# Update and refresh the Faust website	
 	cd faustwebsite
-	git pull
-	./build -a -v
+	./build -a -v -d https://faustcloud.grame.fr
 	./deploy
 
 	$SUDO cp config-files/001-faust.conf /etc/apache2/sites-available/
