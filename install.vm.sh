@@ -9,10 +9,6 @@ log=install.log
 ./install.compiler.sh
 echo
 ./install.faustwebsite.sh
-echo
-./install.faustplayground.sh
-echo
-./install.editor.sh
 echo "Faust services installation done"
 echo -n "Faust services installed on " >> $log
 echo

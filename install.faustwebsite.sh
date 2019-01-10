@@ -27,7 +27,7 @@ installserver() {
 	# Install Faust if needed
 	if [ ! -d "faustwebsite" ]; then
 	echo "############################ clone faustwebsite"
-		git clone https://github.com/grame-cncm/faustwebsite.git
+		git --recursive clone https://github.com/grame-cncm/faustwebsite.git
 	fi
 	
 	if [ ! -d ~/www ]; then
@@ -37,7 +37,8 @@ installserver() {
 	# Update and refresh the Faust website	
 	cd faustwebsite
 	git pull
-	./bin/refreshFaustWebsite . ~/www
+	./build -a -v
+	./deploy
 
 	$SUDO cp config-files/001-faust.conf /etc/apache2/sites-available/
 	$SUDO sed -i s%HOME%$MYHOME%g /etc/apache2/sites-available/001-faust.conf
