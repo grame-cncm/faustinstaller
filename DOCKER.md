@@ -18,11 +18,11 @@ In order to avoid having to type `sudo` for most docker command you can add your
     newgrp docker (or relog)
 
 ### Check docker working without sudo
-Now commands should work without sudo. Let's try:
+Now commands should work without `sudo`. Let's try:
 
     docker ps
 
-and the a more ambitious test:
+and the more ambitious test:
 
     docker run hello-world
 
@@ -84,10 +84,10 @@ The goal is to run an android compilation on the container to force gradle updat
 
 
 ## nouvelle installation des packages android
-
+```
     android/tools/bin/sdkmanager "build-tools;28.0.3"  "cmake;3.6.4111459" "extras;android;m2repository" "ndk-bundle" "patcher;v4" "platform-tools" "platforms;android-25"  "platforms;android-27" "tools" 
 
-build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | build-tools/25.0.3/         
+  build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | build-tools/25.0.3/         
   build-tools;28.0.3          | 28.0.3       | Android SDK Build-Tools 28.0.3 | build-tools/28.0.3/         
   cmake;3.6.4111459           | 3.6.4111459  | CMake 3.6.4111459              | cmake/3.6.4111459/          
   emulator                    | 27.1.12      | Android Emulator               | emulator/                   
@@ -98,12 +98,12 @@ build-tools;25.0.3          | 25.0.3       | Android SDK Build-Tools 25.0.3 | bu
   platforms;android-25        | 3            | Android SDK Platform 25        | platforms/android-25/       
   platforms;android-27        | 1            | Android SDK Platform 27        | platforms/android-27/       
   tools                       | 26.1.1       | Android SDK Tools              | tools/                      
-
+```
 
 # new stuff
-
+```
 docker run -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 8888:80 grame/faustservice-ubuntu-1604-five-tuned :latest
-
+```
 
 # On Google Compute Engine
 
@@ -134,7 +134,7 @@ Assuming a VM created from the docker image:  `eu.gcr.io/faust-cloud-208407/faus
 # Stuff 9/1/2018
 
 Update of faustservice and test with docker
-
+```
     docker run -it faustservice-with-crash2 /bin/bash
     git pull
     make
@@ -143,3 +143,4 @@ Update of faustservice and test with docker
     docker commit 0431e19b6630 faustservice-with-crash3
 
     docker run -d --restart=on-failure -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/sharedfaustfolder:/tmp/sharedfaustfolder -p 8888:80 faustservice-with-crash3 ./faustweb -p 80
+```
