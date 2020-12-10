@@ -27,10 +27,11 @@ php libapache2-mod-php qrencode highlight apache2 ruby ruby-dev nodejs \
 openjdk-8-jdk g++-mingw-w64 g++-multilib
 
 # Then additional packages from ppa repositories
-RUN add-apt-repository -y "ppa:dr-graef/pure-lang.xenial"; \
-add-apt-repository -y "ppa:certbot/certbot"; \
+#RUN add-apt-repository -y "ppa:dr-graef/pure-lang.xenial"; \
+RUN add-apt-repository -y "ppa:certbot/certbot"; \
 apt-get update; \
-apt-get install -y faust2pd faust2pd-extra python-certbot-apache
+apt-get install -y python-certbot-apache
+#apt-get install -y faust2pd faust2pd-extra python-certbot-apache
 
 # We install the MAX SDK
 RUN wget https://cycling74.com/download/max-sdk-7.1.0.zip; \
